@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test Suite" parallel="false">
+  <test name="Proxy Test">    
+    <classes>
+      <class name="com.proxy.test.ProxyTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

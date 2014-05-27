@@ -1,0 +1,45 @@
+<project name="Litle Proxy Test">    
+
+    <property name="src.dir" value="src"/>
+    <property name="lib.dir" value="lib"/>    
+    <property name="build.dir" value="bin"/>
+
+    <path id="classpath">	
+      	   <pathelement path="lib"/>
+      	        <fileset dir="lib">
+        		<include name="**/*.jar"/>
+		</fileset>
+	   <pathelement location="classes"/>
+      		<dirset dir="bin">
+			<include name="classes"/>
+		</dirset>
+    </path>
+
+    <taskdef name="testng" classname="org.testng.TestNGAntTask">
+    	<classpath>
+        	<pathelement location="${lib.dir}/testng-6.8.7.jar"/>
+	</classpath>
+    </taskdef>
+
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="bin/classes"/>
+        <javac srcdir="src" destdir="bin/classes">
+	  	<classpath>  
+        		<fileset dir="lib">  
+	      	      <include name="**/*.jar" />  
+	        	</fileset>  
+      	 </classpath>  
+	 </javac>
+    </target>
+
+    <target name="test" depends="compile">
+        <testng delegateCommandSystemProperties="true"
+	     classpathref = "classpath">		
+        	<xmlfileset dir="${src.dir}" includes="ProxyTest.xml"/>
+        </testng>
+    </target>    
+   </project>
