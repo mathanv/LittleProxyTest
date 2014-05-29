@@ -40,7 +40,7 @@ public class ProxyTest {
 		// Comment the below two lines for reproducing the second issue i mentioned in the mail
 		//wDriver = wdBuilder.getDriver();
 		//wDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-		wDriver.get("http://www.vizury.com");
+		wDriver.get("http://jplstage.vizury.com");
 		wDriver.manage().deleteAllCookies();
 		wDriver.get("about:blank");
 	}
