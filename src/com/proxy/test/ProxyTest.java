@@ -20,7 +20,8 @@ public class ProxyTest {
 	private static WebDriver wDriver;
 	private static final int port = 7070;
 	private static String httpsUrl = "https://ssl.vizury.com/analyze/analyze.php?account_id=VIZVRM299&param=e500&orderid=11141048851&orderprice=&pid1=132-7121-406&currency=false&crmid=3005147345&section=1&level=1";
-	private static String httpUrl = "http://www.vizury.com/analyze/analyze.php?account_id=VIZVRM299&section=1&level=1&param=e300&pid=004-2685-046&catid=Camisa&subcat1id=Camisa_Nike&pname=Camisa%20Nike%20Sele%C3%A7%C3%A3o%20Brasil%20I%202014%20n%C2%BA%2010&image=http%3A%2F%2Fstatic1.netshoes.net%2FProdutos%2F46%2F004-2685-046%2F004-2685-046_detalhe1.jpg&lp=http%3A%2F%2Fwww.netshoes.com.br%2Fttp%3A%2F%2Fwww.netshoes.com.br%2Fproduto%2Fcamisa-nike-selecao-brasil-i-2014-n-10--torcedor-004-2685&old=&new=239%2C90&misc=9&misc1=26%2C66";
+	//private static String httpUrl = "http://www.vizury.com/analyze/analyze.php?account_id=VIZVRM299&section=1&level=1&param=e300&pid=004-2685-046&catid=Camisa&subcat1id=Camisa_Nike&pname=Camisa%20Nike%20Sele%C3%A7%C3%A3o%20Brasil%20I%202014%20n%C2%BA%2010&image=http%3A%2F%2Fstatic1.netshoes.net%2FProdutos%2F46%2F004-2685-046%2F004-2685-046_detalhe1.jpg&lp=http%3A%2F%2Fwww.netshoes.com.br%2Fttp%3A%2F%2Fwww.netshoes.com.br%2Fproduto%2Fcamisa-nike-selecao-brasil-i-2014-n-10--torcedor-004-2685&old=&new=239%2C90&misc=9&misc1=26%2C66";
+	private static String httpUrl = "https://ssl.vizury.com/analyze/analyze.php?account_id=VIZVRM299&param=e500&orderid=11141048851&orderprice=&pid1=132-7121-406&currency=false&crmid=3005147345&section=1&level=1";
 	
 	@BeforeSuite
 	public void setUp () {
@@ -28,8 +29,8 @@ public class ProxyTest {
 		wdBuilder = new WebDriverBuilder("chrome", true, port);
 		// Uncomment the below lines for reproducing the second issue i mentioned in the mail
 		// Change the value of httpUrl to that of httpsUrl in the initialization above
-		//wDriver = wdBuilder.getDriver();
-		//wDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		wDriver = wdBuilder.getDriver();
+		wDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 	}
 	
 	@BeforeMethod
@@ -37,8 +38,10 @@ public class ProxyTest {
 		proxyServer.clearSessionInfo();
 		proxyServer.initSessionInfo();
 		// Comment the below two lines for reproducing the second issue i mentioned in the mail
-		wDriver = wdBuilder.getDriver();
-		wDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		//wDriver = wdBuilder.getDriver();
+		//wDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		wDriver.get("www.vizury.com");
+		wDriver.manage.deleteAllCookies();
 		wDriver.get("about:blank");
 	}
 	
@@ -57,9 +60,9 @@ public class ProxyTest {
 	@AfterMethod
 	public void clearProxyAndBrowser () {
 		// Comment the below lines for reproducing the second issue i mentioned in the mail
-		if (wDriver != null) {
+		/*if (wDriver != null) {
 			wDriver.quit();			
-		}
+		}*/
 	}
 	
 	@AfterSuite
